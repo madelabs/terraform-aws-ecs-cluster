@@ -1,0 +1,37 @@
+@startuml terraform-aws-ecs-app
+
+!define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v15.0/dist
+!include AWSPuml/AWSCommon.puml
+!include AWSPuml/AWSSimplified.puml
+!include AWSPuml/Groups/AWSCloud.puml
+!include AWSPuml/NetworkingContentDelivery/all.puml
+!include AWSPuml/Groups/all.puml
+!include AWSPuml/Storage/all.puml
+!include AWSPuml/Containers/all.puml
+!include AWSPuml/ManagementGovernance/all.puml
+!include AWSPuml/SecurityIdentityCompliance/all.puml
+
+left to right direction
+
+AWSCloudGroup(cloud)  {
+
+  RegionGroup(region, "Region") {
+    
+    CloudWatchLogs(log_group, "CloudWatch", "") #LightGreen
+    KeyManagementService(kms_key, "KMS Key", "") #LightGreen
+    
+    VPCGroup(vpc, "VPC")  {
+    
+    Fargate(fargate_cluster, "Fargate Capacity Provider", "") #LightGreen
+
+        GenericGroup(ecs, "\t ECS \t")  {
+            ElasticContainerService(cluster, "ECS Cluster", "") #LightGreen
+        }
+    } 
+  }
+    cluster --> fargate_cluster
+    cluster --> log_group : Execute Command Logs
+    cluster --> kms_key : Execute Command Encryption Key
+}
+
+@enduml

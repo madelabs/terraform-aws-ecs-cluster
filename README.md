@@ -6,9 +6,11 @@ MadeLabs is proud to support the open source community with these blueprints for
 
 We're also for hire: [https://www.madelabs.io](https://www.madelabs.io)
 <!-- END MadeLabs Header -->
-
 ---
+
 A Terraform module for managing an AWS ECS Cluster.
+
+![PlantUML model](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/madelabs/terraform-aws-ecs-cluster/main/docs/terraform-aws-ecs-cluster.puml)
 
 ## Requirements
 
