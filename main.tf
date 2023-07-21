@@ -1,6 +1,4 @@
 terraform {
-  required_version = ">= 1.4.6"
-
   required_providers {
     aws = {
       version = ">= 5.0.0"
@@ -8,3 +6,6 @@ terraform {
     }
   }
 }
+
+data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}

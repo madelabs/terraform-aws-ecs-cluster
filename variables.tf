@@ -11,7 +11,7 @@ variable "environment" {
 variable "enable_container_insights" {
   type        = bool
   description = "Whether to enable container insights. https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights.html"
-  default     = false
+  default     = true
 }
 
 variable "execute_command_logging" {
@@ -62,14 +62,16 @@ variable "capacity_providers" {
 
 variable "default_capacity_provider_strategy" {
   type = list(object({
-    base              = optional(number)
-    weight            = optional(number)
     capacity_provider = string
+    base              = number
+    weight            = number
   }))
-  default = [{
-    base              = 1
-    weight            = 100
-    capacity_provider = "FARGATE"
-  }]
   description = "Cluster default capacity provider arguments."
+  default     = []
+}
+
+variable "kms_enable_key_rotation" {
+  type        = bool
+  description = "Specifies whether key rotation is enabled. Defaults to true."
+  default     = true
 }

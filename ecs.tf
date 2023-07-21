@@ -1,5 +1,7 @@
 
 resource "aws_ecs_cluster" "cluster" {
+  # checkov:skip=CKV_AWS_224: execute command logging defaults to true
+  # checkov:skip=CKV_AWS_65: 'containerInsights' is set to default 'enabled' for the cluster 
   name = "${var.project_name}-${var.environment}-cluster"
 
   setting {
@@ -9,7 +11,7 @@ resource "aws_ecs_cluster" "cluster" {
 
   configuration {
     execute_command_configuration {
-      kms_key_id = var.execute_command_enable_encryption == true ? aws_kms_key.execute_command_key[0].arn : null
+      kms_key_id = var.execute_command_enable_encryption == true ? aws_kms_key.execute_command[0].arn : null
       logging    = var.execute_command_logging
 
       dynamic "log_configuration" {
