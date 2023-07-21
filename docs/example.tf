@@ -1,5 +1,6 @@
 module "ecs_cluster" {
   source       = "madelabs/ecs-cluster/aws"
+  version      = "x.x.x"
   project_name = "my-ecs-cluster"
   environment  = "dev"
 
