@@ -42,7 +42,7 @@ data "aws_iam_policy_document" "execute_command_logging_policy" {
       identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
     }
 
-    resources = ["*"]
+    resources = [aws_kms_key.execute_command_logging[0].arn]
   }
 
   statement {
@@ -60,7 +60,7 @@ data "aws_iam_policy_document" "execute_command_logging_policy" {
       identifiers = ["logs.${data.aws_region.current.name}.amazonaws.com"]
     }
 
-    resources = ["*"]
+    resources = [aws_kms_key.execute_command_logging[0].arn]
 
     condition {
       test     = "ArnLike"
